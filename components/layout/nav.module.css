@@ -1,0 +1,269 @@
+.nav {
+  padding: 0.5rem;
+  padding-right: 3.5rem;
+  padding-bottom: 0.2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid;
+  border-image: linear-gradient(45deg, var(--color-2), var(--color-3), var(--color-4)) 1;
+}
+.nav a {
+  text-decoration: none;
+}
+
+.img-container {
+  padding: 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.img-container h2 {
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 1px;
+  font-size: 2rem;
+  color: var(--color-4);
+}
+
+.img-container img {
+  width: 5rem;
+  height: auto;
+}
+
+.second-container {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.list-of-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.list-item svg {
+  width: 2rem;
+  color: var(--color-4);
+}
+
+.list-item a {
+  transition: all 0.4s ease;
+  font-size: 2rem;
+  text-decoration: none;
+  color: black;
+}
+
+.list-item:hover a {
+  transform: translateY(-0.5rem);
+}
+
+.active a {
+  border-bottom: 1px solid var(--color-4);
+}
+
+.open-nav-btn svg {
+  z-index: 150;
+  width: 4rem;
+  position: absolute;
+  top: 1.5%;
+  right: 1%;
+  color: black;
+  cursor: pointer;
+}
+
+/* NAVIGATION */
+
+.nav-container {
+  animation: moveFromRight 0.5s ease;
+  position: fixed;
+  top: 0%;
+  right: 0%;
+  z-index: 10;
+  height: 100vh;
+  width: 30%;
+  background: linear-gradient(180deg, var(--color-gradient-3), var(--color-gradient-2));
+  padding-top: 8%;
+}
+
+.search-icon-container {
+  padding: 0 10%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.search-icon-container svg {
+  width: 4rem;
+  color: var(--color-4);
+  cursor: pointer;
+}
+
+.search-icon-container input {
+  width: 90%;
+  height: 4rem;
+  background-color: transparent;
+  border: 3px solid var(--color-4);
+  font-size: 1.5rem;
+  color: rgb(37, 23, 23);
+  padding-left: 1rem;
+  outline: none;
+}
+
+.search-icon-container input::placeholder {
+  font-size: 1.5rem;
+  color: rgb(37, 23, 23);
+}
+
+.nav-list {
+  margin-top: 30%;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-item a {
+  font-size: 2rem;
+  text-decoration: none;
+  color: #000;
+  transition: all 0.2s ease;
+}
+
+.nav-item svg {
+  width: 4rem;
+  color: var(--color-4);
+}
+
+.nav-item:hover a {
+  border-bottom: 1px solid var(--color-4);
+}
+
+.creator {
+  position: absolute;
+  bottom: 1%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.2rem;
+  font-family: monospace;
+  color: #fff;
+}
+
+@keyframes moveFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(100rem) scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .nav {
+    padding: 1rem 0;
+    padding-right: 1rem;
+  }
+
+  .open-nav-btn svg {
+    width: 3rem;
+    top: 2%;
+  }
+
+  .img-container img {
+    width: 3rem;
+  }
+
+  .img-container h2 {
+    font-size: 1.7rem;
+  }
+
+  .list-of-links {
+    gap: 1rem;
+  }
+
+  .list-item {
+    gap: 0.25rem;
+  }
+
+  .list-item svg {
+    width: 1.5rem;
+  }
+
+  .list-item a {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .nav {
+    padding: 1rem 0.25rem;
+    padding-right: 0.25rem;
+  }
+
+  .open-nav-btn svg {
+    width: 2rem;
+    top: 2%;
+  }
+
+  .img-container {
+    gap: 0.5rem;
+  }
+
+  .img-container img {
+    width: 2rem;
+  }
+
+  .img-container h2 {
+    font-size: 1.3rem;
+  }
+
+  .list-of-links {
+    gap: 0.75rem;
+  }
+
+  .list-item a {
+    font-size: 1.1rem;
+  }
+}
+
+/* NAV RESPONSIVE */
+
+@media (max-width: 1400px) {
+  .nav-container {
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-container {
+    width: 70%;
+  }
+}
+
+@media (max-width: 500px) {
+  .nav-container {
+    padding-top: 8rem;
+    width: 100%;
+  }
+}
