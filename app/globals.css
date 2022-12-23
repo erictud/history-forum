@@ -1,5 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap");
 
+/* TITLE FONT */
+@import url("https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -7,9 +10,29 @@
   font-size: 10px;
 }
 
+@media (max-width: 767px) {
+  * {
+    font-size: 7px;
+  }
+}
+
+@media (max-width: 400px) {
+  * {
+    font-size: 5px;
+  }
+}
+
 body {
   font-family: "Poppins", sans-serif;
   background-color: var(--color-1);
+}
+
+.title {
+  font-size: 3.5rem;
+  font-family: "Fjalla One", sans-serif;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to left bottom, var(--color-3) 0%, var(--color-4) 80%);
 }
 
 :root {
@@ -19,7 +42,7 @@ body {
   --color-4: #2d2424;
 
   /* NAV LINEAR GRADIENT */
-  --color-gradient-2: rgb(184, 92, 56, 0.8);
-  --color-gradient-3: rgb(92, 61, 46, 0.4);
+  --color-gradient-2: rgb(184, 92, 56, 0.95);
+  --color-gradient-3: rgb(92, 61, 46, 0.95);
   --color-gradient-4: rgb(45, 36, 36, 0.6);
 }

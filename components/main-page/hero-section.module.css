@@ -1,0 +1,74 @@
+.hero-section {
+  width: 100vw;
+  min-height: 70rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(45deg, var(--color-gradient-4), var(--color-gradient-3)),
+    url("/herosection-cover-landing.jpg");
+  border-bottom: 2px solid;
+  border-image: linear-gradient(45deg, var(--color-2), var(--color-3), var(--color-4)) 1;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.text-container h1,
+.text-container h1 span {
+  font-size: 5rem;
+  color: white;
+  letter-spacing: 0.2rem;
+  font-weight: 700;
+}
+
+.text-container h1 span {
+  font-weight: 900;
+}
+
+.text-container h1 span:first-child {
+  color: blue;
+}
+
+.text-container h1 span:nth-child(2) {
+  color: yellow;
+}
+
+.text-container h1 span:nth-child(3) {
+  color: red;
+}
+
+.text-container h2 {
+  font-size: 3rem;
+  color: #fff;
+  font-weight: 400;
+  font-style: italic;
+  text-align: center;
+}
+
+.btn-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  font-size: 2rem;
+  color: #fff;
+  background-color: var(--color-4);
+  text-decoration: none;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.btn svg {
+  width: 2rem;
+}
