@@ -1,0 +1,40 @@
+.faq-item {
+}
+
+.faq-header {
+  width: 100%;
+  margin-top: 1rem;
+  border: 1px solid var(--color-3);
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.faq-header__container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3rem;
+}
+
+.faq-header h5 {
+  font-size: 3rem;
+}
+
+.faq-header svg {
+  width: 3.5rem;
+}
+
+.faq-answer {
+  border: 1px solid var(--color-3);
+  border-top: none;
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+.faq-answer p {
+  font-size: 2rem;
+}

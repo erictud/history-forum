@@ -6,22 +6,17 @@ export default function HeroSection() {
   return (
     <header className={styles["hero-section"]}>
       <div className={styles["text-container"]}>
-        <h1>
-          {" "}
-          <span>R</span>
-          <span>o</span>
-          <span>m</span>Historia
-        </h1>
-        <h2>Locul in care istoria se intalneste cu socializarea</h2>
+        <h1>Stamppedia</h1>
+        <h2>A forum about stamps of all types and from all countries</h2>
         <div className={styles["btn-row"]}>
           <Link href="/app" className={styles["btn"]}>
-            <PlusIcon /> Creeaza cont
+            <PlusIcon /> Sign Up
           </Link>
           <Link href="/" className={styles["btn"]}>
-            <UserIcon /> Intra in cont
+            <UserIcon /> Log In
           </Link>
           <Link href="/" className={styles["btn"]}>
-            &darr; Afla mai multe
+            &darr; Find more
           </Link>
         </div>
       </div>

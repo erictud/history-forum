@@ -1,5 +1,7 @@
 import styles from "./post-overview.module.css";
 import Link from "next/link";
+import LikeIconShape from "../../icons/LikeIconShape";
+import LikeIconFilled from "../../icons/LikeIconFilled";
 
 export default function PostOverview(props: {
   title: string;
@@ -15,7 +17,7 @@ export default function PostOverview(props: {
     <>
       <div className={styles["post-overview"]}>
         <div className={styles["swords-number"]}>
-          ⚔️
+          <LikeIconShape />
           <span>{numberOfLikes}</span>
         </div>
         <div className={styles["post-info"]}>
@@ -34,7 +36,7 @@ export default function PostOverview(props: {
           <div className={styles["second-row"]}>
             <h3>{title}</h3>
             <p>{description.slice(0, 150)}...</p>
-          </div>{" "}
+          </div>
           {img && (
             <>
               <details>

@@ -12,6 +12,9 @@ import SearchIcon from "../../icons/SearchIcon";
 import UserIcon from "../../icons/UserIcon";
 import UserGroupIcon from "../../icons/UserGroupIcon";
 import TreadIcon from "../../icons/TreadIcon";
+import LogoIcon from "../../icons/LogoIcon";
+import LikeIconShape from "../../icons/LikeIconShape";
+import TickIconCircle from "../../icons/TickIconCIrcle";
 
 export default function Nav() {
   const [navIsShown, setNavIsShown] = useState(false);
@@ -21,8 +24,7 @@ export default function Nav() {
       <div className={styles.nav}>
         <Link href="/">
           <div className={styles["img-container"]}>
-            <Image src="/logo-icon.png" alt="logo" width={50} height={60} />
-            <h2>RomHistoria</h2>
+            <LogoIcon /> <h2>Stamppedia</h2>
           </div>
         </Link>
         <div className={styles["second-container"]}>
@@ -37,12 +39,15 @@ export default function Nav() {
             </li>
           </ul>
           <div className={styles["open-nav-btn"]} onClick={() => setNavIsShown((prev) => !prev)}>
-            {navIsShown ? <NavIconOpen /> : <NavIcon />}
+            {navIsShown ? null : <NavIcon />}
           </div>
         </div>
       </div>
       {navIsShown && (
         <nav className={styles["nav-container"]}>
+          <div className={styles["open-nav-btn"]} onClick={() => setNavIsShown((prev) => !prev)}>
+            {navIsShown ? <NavIconOpen /> : null}
+          </div>
           <div className={styles["search-icon-container"]}>
             <input type="text" placeholder="Search..." />
             <SearchIcon />
@@ -53,8 +58,12 @@ export default function Nav() {
               <Link href="/">Account Settings</Link>
             </li>
             <li className={styles["nav-item"]}>
-              <TreadIcon />
-              <Link href="/">Popular Threads</Link>
+              <LikeIconShape />
+              <Link href="/">Latest Posts</Link>
+            </li>
+            <li className={styles["nav-item"]}>
+              <TickIconCircle />
+              <Link href="/">Forum Rules</Link>
             </li>
             <li className={styles["nav-item"]}>
               <UserGroupIcon />

@@ -5,9 +5,8 @@ import styles from "./last-posts.module.css";
 
 const postData = [
   {
-    title: "Unirea de la 1600 - consecinte",
-    description:
-      "Care sunt consecintele unirii de la 1600 pe termen scurt? Au fost benefice pt poporul roman din zonele subjugate precum Basarabia sau Transilvania",
+    title: "First romanian stamps",
+    description: "Which are the first romanian stamps? Who was the stamp from",
     date: "12-22-2022",
     img: null,
     id: "p1",
@@ -15,9 +14,8 @@ const postData = [
     numberOfLikes: 21,
   },
   {
-    title: "Unirea de la 1600 - consecinte",
-    description:
-      "Care sunt consecintele unirii de la 1600 pe termen scurt? Au fost benefice pt poporul roman din zonele subjugate precum Basarabia sau Transilvania",
+    title: "Communist stamps",
+    description: "Which are the first romanian stamps? Who was the stamp from>",
     date: "6-5-2022",
     img: "/herosection-cover-landing.jpg",
     id: "p2",
@@ -25,9 +23,8 @@ const postData = [
     numberOfLikes: 21,
   },
   {
-    title: "Unirea de la 1600 - consecinte",
-    description:
-      "Care sunt consecintele unirii de la 1600 pe termen scurt? Au fost benefice pt poporul roman din zonele subjugate precum Basarabia sau Transilvania",
+    title: "The most valubale stamp in history",
+    description: "Which are the first romanian stamps? Who was the stamp from>",
     date: "11-12-2022",
     img: null,
     id: "p3",
@@ -39,7 +36,7 @@ const postData = [
 export default function LastPosts() {
   return (
     <div className={styles["container"]}>
-      <h3 className="title">Ultimele postari</h3>
+      <h3 className="title">Latest posts</h3>
       <div className={styles["posts-list"]}></div>
       {postData.map((el, i) => (
         <PostOverview
@@ -54,7 +51,7 @@ export default function LastPosts() {
         />
       ))}
       <Link href="/">
-        Vezi mai multe postari <ArrDown />
+        See more posts <ArrDown />
       </Link>
     </div>
   );

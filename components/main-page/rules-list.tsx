@@ -1,25 +1,27 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
+import ArrRight from "../../icons/ArrRight";
 import TickIconCircle from "../../icons/TickIconCIrcle";
 import TrophyIcon from "../../icons/TrophyIcon";
 import UserGroupIcon from "../../icons/UserGroupIcon";
 import styles from "./rules-list.module.css";
 const content = [
   {
-    title: "Informatiile prezentate trebuie sa fie veridice",
+    title: "All the info has to be verified",
     deatiils:
-      " Informatiile prezentate trebuie sa fie veridice Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, tempore ab similique maiores blanditiis ex praesentium quos eaque sequi perspiciatis saepe consequatur provident quas, voluptatibus nesciunt reiciendis architecto ratione vitae recusandae nam quidem tempora quis. Distinctio tenetur ducimus velit error, aliquid neque et accusamus cum inventore quae impedit culpa porro? Commodi doloremque magnam odio aperiam vero dolorem blanditiis id officia quis, nam expedita reiciendis ipsum sunt dolores nulla odit quasi nostrum suscipit excepturi voluptatem quisquam consequuntur minima quia perspiciatis. Nobis enim at, quis, exercitationem dicta temporibus cum quos sapiente corrupti accusantium eaque perspiciatis quasi obcaecati praesentium natus impedit, id recusandae?",
+      " All the info has to be verified Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, tempore ab similique maiores blanditiis ex praesentium quos eaque sequi perspiciatis saepe consequatur provident quas, voluptatibus nesciunt reiciendis architecto ratione vitae recusandae nam quidem tempora quis. Distinctio tenetur ducimus velit error, aliquid neque et accusamus cum inventore quae impedit culpa porro? Commodi doloremque magnam odio aperiam vero dolorem blanditiis id officia quis, nam expedita reiciendis ipsum sunt dolores nulla odit quasi nostrum suscipit excepturi voluptatem quisquam consequuntur minima quia perspiciatis. Nobis enim at, quis, exercitationem dicta temporibus cum quos sapiente corrupti accusantium eaque perspiciatis quasi obcaecati praesentium natus impedit, id recusandae?",
   },
   {
-    title: "Respecta partenrii de discutie",
+    title: "You have to respect your discussion parteners",
     deatiils:
-      "Respecta partenrii de discutie Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, tempore ab similique maiores blanditiis ex praesentium quos eaque sequi perspiciatis saepe consequatur provident quas, voluptatibus nesciunt reiciendis architecto ratione vitae recusandae nam quidem tempora quis. Distinctio tenetur ducimus velit error, aliquid neque et accusamus cum inventore quae impedit culpa porro? Commodi doloremque magnam odio aperiam vero dolorem blanditiis id officia quis, nam expedita reiciendis ipsum sunt dolores nulla odit quasi nostrum suscipit excepturi voluptatem quisquam consequuntur minima quia perspiciatis. Nobis enim at, quis, exercitationem dicta temporibus cum quos sapiente corrupti accusantium eaque perspiciatis quasi obcaecati praesentium natus impedit, id recusandae?",
+      "You have to respect your discussion parteners Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, tempore ab similique maiores blanditiis ex praesentium quos eaque sequi perspiciatis saepe consequatur provident quas, voluptatibus nesciunt reiciendis architecto ratione vitae recusandae nam quidem tempora quis. Distinctio tenetur ducimus velit error, aliquid neque et accusamus cum inventore quae impedit culpa porro? Commodi doloremque magnam odio aperiam vero dolorem blanditiis id officia quis, nam expedita reiciendis ipsum sunt dolores nulla odit quasi nostrum suscipit excepturi voluptatem quisquam consequuntur minima quia perspiciatis. Nobis enim at, quis, exercitationem dicta temporibus cum quos sapiente corrupti accusantium eaque perspiciatis quasi obcaecati praesentium natus impedit, id recusandae?",
   },
   {
-    title: "Preznetare obiective",
+    title: "All the facts have to be presented in an objective manner",
     deatiils:
-      "Preznetare obiective Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, tempore ab similique maiores blanditiis ex praesentium quos eaque sequi perspiciatis saepe consequatur provident quas, voluptatibus nesciunt reiciendis architecto ratione vitae recusandae nam quidem tempora quis. Distinctio tenetur ducimus velit error, aliquid neque et accusamus cum inventore quae impedit culpa porro? Commodi doloremque magnam odio aperiam vero dolorem blanditiis id officia quis, nam expedita reiciendis ipsum sunt dolores nulla odit quasi nostrum suscipit excepturi voluptatem quisquam consequuntur minima quia perspiciatis. Nobis enim at, quis, exercitationem dicta temporibus cum quos sapiente corrupti accusantium eaque perspiciatis quasi obcaecati praesentium natus impedit, id recusandae?",
+      "All the facts have to be presented in an objective manner Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, tempore ab similique maiores blanditiis ex praesentium quos eaque sequi perspiciatis saepe consequatur provident quas, voluptatibus nesciunt reiciendis architecto ratione vitae recusandae nam quidem tempora quis. Distinctio tenetur ducimus velit error, aliquid neque et accusamus cum inventore quae impedit culpa porro? Commodi doloremque magnam odio aperiam vero dolorem blanditiis id officia quis, nam expedita reiciendis ipsum sunt dolores nulla odit quasi nostrum suscipit excepturi voluptatem quisquam consequuntur minima quia perspiciatis. Nobis enim at, quis, exercitationem dicta temporibus cum quos sapiente corrupti accusantium eaque perspiciatis quasi obcaecati praesentium natus impedit, id recusandae?",
   },
 ];
 
@@ -27,26 +29,26 @@ export default function RulesList() {
   const [selectedRule, setSelectedRule] = useState(0);
   return (
     <div className={styles["rules-list"]}>
-      <h3 className="title">Regulile forumului</h3>
+      <h3 className="title">Principal rules of the forum</h3>
       <div className={styles["tabbed"]}>
         <div className={styles["btn-row"]}>
           <button
             className={`${styles["btn"]} ${selectedRule === 0 && styles.active}`}
             onClick={() => setSelectedRule(0)}
           >
-            Veridicitatea
+            Veridicity
           </button>
           <button
             className={`${styles["btn"]} ${selectedRule === 1 && styles.active}`}
             onClick={() => setSelectedRule(1)}
           >
-            Respectul
+            Respect
           </button>
           <button
             className={`${styles["btn"]} ${selectedRule === 2 && styles.active}`}
             onClick={() => setSelectedRule(2)}
           >
-            Corectitudinea
+            Corectness
           </button>
         </div>
         <div className={styles["content"]}>
@@ -60,6 +62,9 @@ export default function RulesList() {
           <p>{content[selectedRule].deatiils}</p>
         </div>
       </div>
+      <Link href="/">
+        Read all the rules <ArrRight />
+      </Link>
     </div>
   );
 }

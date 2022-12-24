@@ -18,28 +18,11 @@
   gap: 2rem;
 }
 
-.text-container h1,
-.text-container h1 span {
+.text-container h1 {
   font-size: 5rem;
   color: white;
   letter-spacing: 0.2rem;
   font-weight: 700;
-}
-
-.text-container h1 span {
-  font-weight: 900;
-}
-
-.text-container h1 span:first-child {
-  color: blue;
-}
-
-.text-container h1 span:nth-child(2) {
-  color: yellow;
-}
-
-.text-container h1 span:nth-child(3) {
-  color: red;
 }
 
 .text-container h2 {
