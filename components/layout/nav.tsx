@@ -33,9 +33,9 @@ export default function Nav() {
               <HomeIcon />
               <Link href="/">Home</Link>
             </li>
-            <li className={`${styles["list-item"]} ${pathname === "/trending" && styles.active}`}>
-              <TrendingIcon />
-              <Link href="/">Trending</Link>
+            <li className={`${styles["list-item"]} ${pathname === "/auth" && styles.active}`}>
+              <UserIcon />
+              <Link href="/auth">Auth</Link>
             </li>
           </ul>
           <div className={styles["open-nav-btn"]} onClick={() => setNavIsShown((prev) => !prev)}>

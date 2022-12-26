@@ -1,0 +1,115 @@
+.form-container {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
+}
+
+.form-container__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.form-container__header h2 {
+  font-size: 2.5rem;
+}
+
+.form-container__header svg {
+  width: 4rem;
+  color: var(--color-4);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.input-container label {
+  text-align: start;
+  font-size: 2rem;
+  color: #333;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-2rem);
+  transition: all 0.3s ease;
+}
+
+.input-container input:not(:placeholder-shown) ~ label {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.input-container input {
+  width: 60rem;
+  height: 4rem;
+  font-size: 2.5rem;
+  border: none;
+  border-bottom: 2px solid var(--color-4);
+  outline: none;
+  background-color: transparent;
+}
+
+.input-container input::placeholder {
+  font-size: 2.5rem;
+  padding-left: 1rem;
+  color: #333;
+}
+
+.password-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+}
+
+.password-container .input-container input {
+  width: 55rem;
+}
+
+.password-container svg {
+  width: 3rem;
+  cursor: pointer;
+}
+
+.form button {
+  border: none;
+  background-color: var(--color-4);
+  color: #fff;
+  font-size: 2rem;
+  width: 100%;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.form button:hover {
+  background-color: rgb(46, 36, 36, 0.75);
+}
+
+.info-container p,
+.info-container a {
+  font-size: 2rem;
+}
+
+.info-container a {
+  color: var(--color-4);
+}
+
+.error label {
+  color: red !important;
+}

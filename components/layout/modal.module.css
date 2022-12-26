@@ -1,0 +1,47 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+  background-color: rgb(0, 0, 0, 0.5);
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 3rem 6rem;
+  background-color: var(--color-4);
+  z-index: 1001;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.modal h2 {
+  font-size: 3rem;
+  color: #fff;
+}
+
+.modal p {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.modal button {
+  cursor: pointer;
+  width: 100%;
+  padding: 2rem;
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin: 0 auto;
+  background-color: var(--color-3);
+  color: #fff;
+  border: none;
+}

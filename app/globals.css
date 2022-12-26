@@ -16,7 +16,7 @@
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 435px) {
   * {
     font-size: 5px;
   }
@@ -38,8 +38,8 @@ body {
 :root {
   --color-1: #e0c097;
   --color-2: rgb(184, 92, 56);
-  --color-3: #5c3d2e;
-  --color-4: #2d2424;
+  --color-3: rgb(92, 61, 46);
+  --color-4: rgb(46, 36, 36);
 
   /* NAV LINEAR GRADIENT */
   --color-gradient-2: rgb(184, 92, 56, 0.95);

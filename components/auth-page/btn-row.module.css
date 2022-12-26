@@ -1,0 +1,27 @@
+.btn-row {
+  margin: 2rem auto;
+  padding: 0.5rem 0;
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10rem;
+  background-color: rgb(92, 61, 46, 0.5);
+  border-radius: 1rem;
+}
+
+.btn {
+  border-radius: 1rem;
+  padding: 0.5rem 2rem;
+  font-size: 2rem;
+  background-color: var(--color-3);
+  color: #fff;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.active {
+  transform: translateY(-0.5rem) scale(1.1);
+  margin-left: 0.5rem;
+}
