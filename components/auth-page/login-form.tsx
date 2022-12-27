@@ -1,14 +1,20 @@
 "use client";
 
 import { FormEvent, useRef, useState } from "react";
+import { authData } from "../../data/auth-data";
+import { useRecoilState } from "recoil";
 import EyeIcon from "../../icons/EyeIcon";
 import EyeIconCut from "../../icons/EyeIconCut";
 import UserIcon from "../../icons/UserIcon";
 import Modal from "../layout/modal";
 import Spinner from "../layout/spinner";
 import styles from "./auth-form.module.css";
+import { useRouter } from "next/navigation";
+import { auth } from "../../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function LoginForm() {
+  const router = useRouter();
   //Password visibility
   const [showPassword, setShowPasword] = useState(false);
   const passwordRef = useRef() as any;
@@ -30,6 +36,9 @@ export default function LoginForm() {
   const [titleError, setTitleError] = useState("");
   const [messageError, setMessageError] = useState("");
 
+  //Auth global state
+  const [_, setAuthState] = useRecoilState(authData);
+
   const submitForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
@@ -47,7 +56,7 @@ export default function LoginForm() {
       setIsLoading(false);
       return;
     }
-    // Fetch login req
+    //Fetch login req
     const req = await fetch("/api/auth/login", {
       method: "POST",
       body: JSON.stringify({
@@ -64,7 +73,9 @@ export default function LoginForm() {
       setMessageError("Please check your internet connection and try again");
     }
     const { uid } = await req.json();
+    setAuthState(uid);
     setIsLoading(false);
+    router.push("/profile");
   };
   return (
     <>

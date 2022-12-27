@@ -1,0 +1,25 @@
+.row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.row button {
+  width: 100%;
+  font-size: 2rem;
+  padding: 1rem 2rem;
+  color: #fff;
+  background-color: var(--color-3);
+  border: none;
+  border-bottom: 1px solid #fff;
+  transition: 0.2s all ease;
+}
+
+.row button:hover {
+  cursor: pointer;
+  background-color: rgb(92, 61, 46, 0.6);
+}
+
+.row .active {
+  background-color: var(--color-4) !important;
+}

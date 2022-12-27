@@ -55,7 +55,7 @@ export default function Nav() {
           <ul className={styles["nav-list"]}>
             <li className={styles["nav-item"]}>
               <UserIcon />
-              <Link href="/">Account Settings</Link>
+              <Link href="/profile">Account Settings</Link>
             </li>
             <li className={styles["nav-item"]}>
               <LikeIconShape />

@@ -1,14 +1,18 @@
 "use client";
 
 import { FormEvent, useRef, useState } from "react";
+import { authData } from "../../data/auth-data";
+import { useRecoilState } from "recoil";
 import EyeIcon from "../../icons/EyeIcon";
 import EyeIconCut from "../../icons/EyeIconCut";
 import PlusIcon from "../../icons/PlusIcon";
 import Modal from "../layout/modal";
 import Spinner from "../layout/spinner";
 import styles from "./auth-form.module.css";
+import { useRouter } from "next/navigation";
 
 export default function SignupForm() {
+  const router = useRouter();
   //Password visibility
   const [showPassword, setShowPassword] = useState(false);
   const passwordRef = useRef() as any;
@@ -31,6 +35,8 @@ export default function SignupForm() {
   const [titleError, setTitleError] = useState("");
   const [messageError, setMessageError] = useState("");
 
+  // Auth global state
+  const [_, setAuthState] = useRecoilState(authData);
   const submitForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
@@ -55,6 +61,7 @@ export default function SignupForm() {
       setIsLoading(false);
       return;
     }
+
     // Fetch login req
     const req = await fetch("/api/auth/signup", {
       method: "POST",
@@ -72,7 +79,10 @@ export default function SignupForm() {
       setTitleError("Trouble creating account");
       setMessageError("Please check your internet connection  and try again");
     }
+    const { uid } = await req.json();
+    setAuthState(uid);
     setIsLoading(false);
+    router.push("/profile");
   };
   return (
     <>
