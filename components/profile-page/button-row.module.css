@@ -1,11 +1,11 @@
 .row {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
 }
 
 .row button {
-  width: 100%;
+  width: fit-content;
   font-size: 2rem;
   padding: 1rem 2rem;
   color: #fff;

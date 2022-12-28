@@ -1,6 +1,6 @@
 "use client";
 
-import { getAuth } from "firebase/auth";
+import { getAuth, updatePassword } from "firebase/auth";
 import { FormEvent, useState } from "react";
 import { app, auth } from "../../firebase";
 import Modal from "../layout/modal";
@@ -68,11 +68,11 @@ export default function ChangePassword() {
         />
       )}
       <div className={styles.container}>
-        <h2>Change password</h2>
+        <h2 className="title">Change password</h2>
         <form className={styles["form"]} onSubmit={submitForm}>
           <div className={styles["input-container"]}>
             <input
-              type="text"
+              type="password"
               id="password"
               placeholder="Current Password"
               onChange={(e) => setCurPasswordVal(e.currentTarget.value)}

@@ -11,16 +11,10 @@ export default function ButtonRow(props: { changeStateFn: any; state: string }) 
         Change password
       </button>
       <button
-        className={`${state === "change-profile" && styles.active}`}
-        onClick={() => changeStateFn("change-profile")}
+        className={`${state === "change-info" && styles.active}`}
+        onClick={() => changeStateFn("change-info")}
       >
-        Change profile
-      </button>
-      <button
-        className={`${state === "change-pfp" && styles.active}`}
-        onClick={() => changeStateFn("change-pfp")}
-      >
-        Change profile picture
+        Change profile info
       </button>
     </div>
   );
