@@ -1,5 +1,6 @@
-import { updatePassword } from "firebase/auth";
+import { getAuth, updatePassword } from "firebase/auth";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { app } from "../../../firebase";
 
 type Data = {
   data?: any;
@@ -16,7 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     res.status(403).json({ message: "Invalid password!" });
     return;
   }
-  const reqA = await updatePassword(currentUser, newPassword);
-  console.log(reqA);
+  const u = getAuth(app).currentUser!;
+  const reqA = await updatePassword(u, newPassword);
   res.status(200).json({ message: "Password updated successfully" });
 }

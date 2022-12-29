@@ -20,6 +20,7 @@
   flex-direction: column;
   gap: 2rem;
   z-index: 550;
+  min-width: 40rem;
   animation: FadeIn 0.5s ease;
 }
 
@@ -71,6 +72,26 @@
   background-color: var(--color-2);
   font-weight: 500;
   padding: 1rem 2rem;
+}
+
+.add-img-container {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  cursor: pointer;
+  color: #fff;
+}
+
+.add-img-container svg {
+  width: 20rem;
+  display: block;
+  color: #fff;
+}
+
+.add-img-container p {
+  text-align: center;
+  color: #fff;
+  font-size: 2rem;
 }
 
 @keyframes FadeIn {

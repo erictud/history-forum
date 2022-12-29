@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ButtonRow from "./button-row";
 import ChangeDescription from "./change-profile-info";
 import ChangePassword from "./change-password";
@@ -14,6 +14,7 @@ export default function ProfilPageContainer() {
   const changeFn = (arg: ProfileStateType) => {
     changeProfileState(arg);
   };
+
   return (
     <main className={styles.container}>
       <ButtonRow state={profileState} changeStateFn={changeFn} />

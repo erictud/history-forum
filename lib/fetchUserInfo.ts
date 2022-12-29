@@ -1,11 +1,5 @@
 export async function FetchUserInfo(errorFn: any, uid: string) {
-  const req = await fetch("/api/users/userprofile", {
-    method: "POST",
-    body: JSON.stringify({ uid }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const req = await fetch("/api/users/userprofile");
   if (!req.ok) {
     errorFn();
     return;

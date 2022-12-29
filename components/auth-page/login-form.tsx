@@ -74,10 +74,8 @@ export default function LoginForm() {
     }
     const { uid } = await req.json();
     setAuthState(uid);
-    setTimeout(() => {
-      router.push("/profile");
-      setIsLoading(false);
-    }, 1500);
+    router.push("/profile");
+    setIsLoading(false);
   };
   return (
     <>

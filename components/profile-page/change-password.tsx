@@ -42,7 +42,7 @@ export default function ChangePassword() {
     const req = await fetch("/api/users/changepasswords", {
       method: "POST",
       body: JSON.stringify({
-        currentUser: authData.currentUser?.getIdTokenResult(),
+        currentUser: authData.currentUser,
         newPassword: newPasswordVal,
       }),
       headers: {

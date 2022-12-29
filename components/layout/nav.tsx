@@ -15,10 +15,13 @@ import TreadIcon from "../../icons/TreadIcon";
 import LogoIcon from "../../icons/LogoIcon";
 import LikeIconShape from "../../icons/LikeIconShape";
 import TickIconCircle from "../../icons/TickIconCIrcle";
+import { getAuth } from "firebase/auth";
+import { app } from "../../firebase";
 
 export default function Nav() {
   const [navIsShown, setNavIsShown] = useState(false);
   const pathname = usePathname();
+  const uid = getAuth(app).currentUser?.uid;
   return (
     <>
       <div className={styles.nav}>
@@ -29,14 +32,18 @@ export default function Nav() {
         </Link>
         <div className={styles["second-container"]}>
           <ul className={styles["list-of-links"]}>
-            <li className={`${styles["list-item"]} ${pathname === "/" && styles.active}`}>
-              <HomeIcon />
-              <Link href="/">Home</Link>
-            </li>
-            <li className={`${styles["list-item"]} ${pathname === "/auth" && styles.active}`}>
-              <UserIcon />
-              <Link href="/auth">Auth</Link>
-            </li>
+            <Link href="/">
+              <li className={`${styles["list-item"]} ${pathname === "/" && styles.active}`}>
+                <HomeIcon />
+                Home
+              </li>
+            </Link>
+            <Link href="/auth">
+              <li className={`${styles["list-item"]} ${pathname === "/auth" && styles.active}`}>
+                <UserIcon />
+                Auth
+              </li>
+            </Link>
           </ul>
           <div className={styles["open-nav-btn"]} onClick={() => setNavIsShown((prev) => !prev)}>
             {navIsShown ? null : <NavIcon />}
@@ -52,23 +59,31 @@ export default function Nav() {
             <input type="text" placeholder="Search..." />
             <SearchIcon />
           </div>
-          <ul className={styles["nav-list"]}>
-            <li className={styles["nav-item"]}>
-              <UserIcon />
-              <Link href="/profile">Account Settings</Link>
-            </li>
-            <li className={styles["nav-item"]}>
-              <LikeIconShape />
-              <Link href="/">Latest Posts</Link>
-            </li>
-            <li className={styles["nav-item"]}>
-              <TickIconCircle />
-              <Link href="/">Forum Rules</Link>
-            </li>
-            <li className={styles["nav-item"]}>
-              <UserGroupIcon />
-              <Link href="/">User Leaderboard</Link>
-            </li>
+          <ul className={styles["nav-list"]} onClick={(e) => setNavIsShown(false)}>
+            <Link href="/profile">
+              <li className={styles["nav-item"]}>
+                <UserIcon />
+                Account Settings
+              </li>
+            </Link>
+            <Link href="/">
+              <li className={styles["nav-item"]}>
+                <LikeIconShape />
+                Latest Posts
+              </li>
+            </Link>
+            <Link href="/">
+              <li className={styles["nav-item"]}>
+                <TickIconCircle />
+                Forum Rules
+              </li>
+            </Link>
+            <Link href="/">
+              <li className={styles["nav-item"]}>
+                <UserGroupIcon />
+                User Leaderboard
+              </li>
+            </Link>
           </ul>
           <p className={styles["creator"]}>@Tudorica Eric 2022</p>
         </nav>
