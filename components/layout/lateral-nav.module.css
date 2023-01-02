@@ -1,0 +1,66 @@
+.lateral-nav {
+  position: fixed;
+  top: 20%;
+  left: 0;
+}
+
+.show-nav-btn {
+  width: fit-content;
+  color: black;
+  cursor: pointer;
+  background-color: rgb(252, 215, 167);
+  padding: 0.2rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.show-nav-btn svg {
+  width: 3rem;
+}
+
+.nav {
+  margin-top: 1rem;
+  margin-left: 0.4rem;
+  padding: 2rem 0;
+  background-color: var(--color-1);
+  border-radius: 1rem;
+  border: 1px solid var(--color-4);
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+.nav-list a {
+  text-decoration: none;
+  color: black;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-item {
+  padding: 2rem 3rem;
+  transition: all 0.4s ease;
+}
+
+.nav-item:hover {
+  background-color: var(--color-2);
+}
+
+.nav-item svg {
+  width: 3rem;
+  color: black;
+}
+
+.nav-item p {
+  font-size: 2rem;
+}

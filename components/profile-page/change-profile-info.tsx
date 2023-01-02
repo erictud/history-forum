@@ -3,6 +3,7 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { authData } from "../../data/auth-data";
+import { currentUserData } from "../../data/currentUser-data";
 import PencilIcon from "../../icons/PencilIcon";
 import { FetchUserInfo } from "../../lib/fetchUserInfo";
 import LoadingModal from "../layout/loading-modal";
@@ -25,10 +26,9 @@ export default function ChangeDescription() {
   const [errorMessage, setErrorMessage] = useState("");
   const [hasError, setHasError] = useState(false);
 
-  // Current description state
-  const [description, setDescription] = useState("");
-  const [pfp, setPfp] = useState("");
-  const [username, setUsername] = useState("");
+  // Current user state
+  const [userData, setUserData] = useRecoilState(currentUserData);
+  const { description, username, imgUser } = userData;
 
   //Add description popup state
   const [showPopup, setShowPopup] = useState(false);
@@ -52,27 +52,26 @@ export default function ChangeDescription() {
     setLoadingMessage(loadingMessage);
   };
 
-  useEffect(() => {
-    (async () => {
-      loadingFn(true, "Fetching user data. This may take a while");
-      const fetchCurrentUserData = await fetch("/api/users/currentuserprofile", {
-        method: "GET",
-      });
-      if (!fetchCurrentUserData.ok) {
-        errorFn();
-        loadingFn(false, "");
-        return;
-      }
-      const { username, description, userImg } = await fetchCurrentUserData.json();
-      setUsername(username);
-      setDescription(description);
-      setPfp(userImg);
-      loadingFn(false, "");
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     loadingFn(true, "Fetching user data. This may take a while");
+  //     const fetchCurrentUserData = await fetch("/api/users/currentuserprofile", {
+  //       method: "GET",
+  //     });
+  //     if (!fetchCurrentUserData.ok) {
+  //       errorFn();
+  //       loadingFn(false, "");
+  //       return;
+  //     }
+  //     const { username, description, userImg } = await fetchCurrentUserData.json();
+  //     setUsername(username);
+  //     setDescription(description);
+  //     setPfp(userImg);
+  //     loadingFn(false, "");
+  //   })();
+  // }, []);
 
   const changeDescription = async (newDescription: string) => {
-    console.log(newDescription);
     loadingFn(true, "Changing the description. This may take a few minutes");
     const req = await fetch("/api/users/currentuserprofile", {
       method: "POST",
@@ -87,7 +86,7 @@ export default function ChangeDescription() {
       return;
     }
     const { description } = await req.json();
-    setDescription(description);
+    setUserData({ ...userData, description });
     loadingFn(false, "");
     setShowPopup(false);
     return description;
@@ -108,7 +107,7 @@ export default function ChangeDescription() {
           <h2 className="title">Your profile</h2>
           <section className={styles["info-container"]}>
             <div className={styles["img-container"]}>
-              <img src={`${!pfp && "/default-user.png"}`} alt="Profile picture" />
+              <img src={`${!imgUser && "/default-user.png"}`} alt="Profile picture" />
               <button className={styles["edit-btn"]} onClick={() => setShowPfpPopup(true)}>
                 <PencilIcon /> Edit it
               </button>

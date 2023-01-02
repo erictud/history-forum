@@ -2,26 +2,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import HomeIcon from "../../icons/HomeIcon";
-import NavIcon from "../../icons/NavIcon";
-import TrendingIcon from "../../icons/TrendingIcon";
 import styles from "./nav.module.css";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
-import NavIconOpen from "../../icons/NavIconOpen";
-import SearchIcon from "../../icons/SearchIcon";
-import UserIcon from "../../icons/UserIcon";
-import UserGroupIcon from "../../icons/UserGroupIcon";
-import TreadIcon from "../../icons/TreadIcon";
 import LogoIcon from "../../icons/LogoIcon";
-import LikeIconShape from "../../icons/LikeIconShape";
-import TickIconCircle from "../../icons/TickIconCIrcle";
-import { getAuth } from "firebase/auth";
-import { app } from "../../firebase";
+import { useRecoilState } from "recoil";
+import { authData } from "../../data/auth-data";
+import { currentUserData } from "../../data/currentUser-data";
 
 export default function Nav() {
-  const [navIsShown, setNavIsShown] = useState(false);
   const pathname = usePathname();
-  const uid = getAuth(app).currentUser?.uid;
+  const [uid, _] = useRecoilState(authData);
+  const [userInfo, __] = useRecoilState(currentUserData);
+  const { username, imgUser } = userInfo;
   return (
     <>
       <div className={styles.nav}>
@@ -38,56 +30,21 @@ export default function Nav() {
                 Home
               </li>
             </Link>
-            <Link href="/auth">
-              <li className={`${styles["list-item"]} ${pathname === "/auth" && styles.active}`}>
-                <UserIcon />
-                Auth
-              </li>
-            </Link>
+            {!uid ? (
+              <Link href="/auth">
+                <button className={styles["login-btn"]}>Log in</button>
+              </Link>
+            ) : (
+              <Link href="/profile">
+                <div className={styles["user-container"]}>
+                  <img src={`${!imgUser && "/default-user.png"}`} alt="Profile picture" />
+                  <p>{username}</p>
+                </div>
+              </Link>
+            )}
           </ul>
-          <div className={styles["open-nav-btn"]} onClick={() => setNavIsShown((prev) => !prev)}>
-            {navIsShown ? null : <NavIcon />}
-          </div>
         </div>
       </div>
-      {navIsShown && (
-        <nav className={styles["nav-container"]}>
-          <div className={styles["open-nav-btn"]} onClick={() => setNavIsShown((prev) => !prev)}>
-            {navIsShown ? <NavIconOpen /> : null}
-          </div>
-          <div className={styles["search-icon-container"]}>
-            <input type="text" placeholder="Search..." />
-            <SearchIcon />
-          </div>
-          <ul className={styles["nav-list"]} onClick={(e) => setNavIsShown(false)}>
-            <Link href="/profile">
-              <li className={styles["nav-item"]}>
-                <UserIcon />
-                Account Settings
-              </li>
-            </Link>
-            <Link href="/">
-              <li className={styles["nav-item"]}>
-                <LikeIconShape />
-                Latest Posts
-              </li>
-            </Link>
-            <Link href="/">
-              <li className={styles["nav-item"]}>
-                <TickIconCircle />
-                Forum Rules
-              </li>
-            </Link>
-            <Link href="/">
-              <li className={styles["nav-item"]}>
-                <UserGroupIcon />
-                User Leaderboard
-              </li>
-            </Link>
-          </ul>
-          <p className={styles["creator"]}>@Tudorica Eric 2022</p>
-        </nav>
-      )}
     </>
   );
 }
