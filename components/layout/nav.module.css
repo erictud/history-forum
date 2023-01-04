@@ -115,7 +115,7 @@
 
 .user-container {
   border-left: 3px solid var(--color-2);
-  padding-left: 0.5rem;
+  padding-left: 1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -124,6 +124,7 @@
 
 .user-container img {
   width: 3rem;
+  max-height: 3rem;
   border-radius: 2rem;
 }
 

@@ -1,7 +1,8 @@
 import { getAuth } from "firebase/auth";
 import { collection, doc, getDoc, updateDoc } from "firebase/firestore";
+import { ref, uploadBytes } from "firebase/storage";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { db } from "../../../firebase";
+import { db, storage } from "../../../firebase";
 
 type Data = {
   data?: any;
@@ -26,9 +27,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     return;
   } else if (req.method === "POST") {
     const docRef = doc(db, "users", uid);
-    const { userImg, description } = req.body;
-    if (userImg === undefined) {
-      console.log(description.trim().length);
+    const { description, userImg } = req.body;
+    if (!userImg) {
       if (description.trim().length < 5 || description.trim().length > 1000) {
         res.status(404).json({
           message:
@@ -43,8 +43,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         .status(200)
         .json({ message: "Description updated successfully", description: description });
       return;
-    } else if (description === undefined) {
-      // Upload image
+    } else if (userImg) {
+      await updateDoc(docRef, {
+        userImg,
+      });
+      res.status(200).json({ message: "Profile picture updated successfully" });
     }
   }
   res.status(422).json({ message: "Access denied!" });

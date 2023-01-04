@@ -1,12 +1,12 @@
 "use client";
 
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { authData } from "../../data/auth-data";
 import { currentUserData } from "../../data/currentUser-data";
+import { storage } from "../../firebase";
 import PencilIcon from "../../icons/PencilIcon";
-import { FetchUserInfo } from "../../lib/fetchUserInfo";
-import LoadingModal from "../layout/loading-modal";
 import Modal from "../layout/modal";
 import Spinner from "../layout/spinner";
 import styles from "./change-profile-info.module.css";
@@ -42,8 +42,8 @@ export default function ChangeDescription() {
     setHasError(true);
   };
 
-  const errorFn = () => {
-    setErrorFn("Error", "Could not retrive user data");
+  const errorFn = (msg: string) => {
+    setErrorFn("Error", msg);
     setIsLoading(false);
   };
 
@@ -51,25 +51,6 @@ export default function ChangeDescription() {
     setIsLoading(loadingVal);
     setLoadingMessage(loadingMessage);
   };
-
-  // useEffect(() => {
-  //   (async () => {
-  //     loadingFn(true, "Fetching user data. This may take a while");
-  //     const fetchCurrentUserData = await fetch("/api/users/currentuserprofile", {
-  //       method: "GET",
-  //     });
-  //     if (!fetchCurrentUserData.ok) {
-  //       errorFn();
-  //       loadingFn(false, "");
-  //       return;
-  //     }
-  //     const { username, description, userImg } = await fetchCurrentUserData.json();
-  //     setUsername(username);
-  //     setDescription(description);
-  //     setPfp(userImg);
-  //     loadingFn(false, "");
-  //   })();
-  // }, []);
 
   const changeDescription = async (newDescription: string) => {
     loadingFn(true, "Changing the description. This may take a few minutes");
@@ -81,7 +62,7 @@ export default function ChangeDescription() {
       },
     });
     if (!req.ok) {
-      errorFn();
+      errorFn("Could not change the description");
       loadingFn(false, "");
       return;
     }
@@ -90,6 +71,36 @@ export default function ChangeDescription() {
     loadingFn(false, "");
     setShowPopup(false);
     return description;
+  };
+
+  const changeImg = async (img: any) => {
+    setShowPfpPopup(false);
+    if (!img) {
+      errorFn("Invalid image");
+      return;
+    }
+    loadingFn(true, "Uploading image...");
+    try {
+      const storageRef = ref(storage, `users/${uid}/pfp`);
+      await uploadBytes(storageRef, img);
+      let path = await getDownloadURL(storageRef);
+      setUserData({ ...userData, imgUser: path });
+      const req = await fetch("/api/users/currentuserprofile", {
+        method: "POST",
+        body: JSON.stringify({ userImg: path }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (!req.ok) {
+        errorFn("Could not change the description");
+        loadingFn(false, "");
+        return;
+      }
+    } catch (e) {
+      errorFn("Could not upload image");
+    }
+    loadingFn(false, "");
   };
 
   return (
@@ -107,7 +118,7 @@ export default function ChangeDescription() {
           <h2 className="title">Your profile</h2>
           <section className={styles["info-container"]}>
             <div className={styles["img-container"]}>
-              <img src={`${!imgUser && "/default-user.png"}`} alt="Profile picture" />
+              <img src={`${!imgUser ? "/default-user.png" : imgUser}`} alt="Profile picture" />
               <button className={styles["edit-btn"]} onClick={() => setShowPfpPopup(true)}>
                 <PencilIcon /> Edit it
               </button>
@@ -130,7 +141,7 @@ export default function ChangeDescription() {
       {showPopup && (
         <AddDescriptionPopup resetFn={() => setShowPopup(false)} sendFn={changeDescription} />
       )}
-      {showPfpPopup && <AddPfpPopup resetFn={() => setShowPfpPopup(false)} />}
+      {showPfpPopup && <AddPfpPopup resetFn={() => setShowPfpPopup(false)} submitFn={changeImg} />}
     </>
   );
 }

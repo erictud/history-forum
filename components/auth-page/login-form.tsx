@@ -12,6 +12,8 @@ import styles from "./auth-form.module.css";
 import { useRouter } from "next/navigation";
 import { auth } from "../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { currentUserData } from "../../data/currentUser-data";
+import LoadingModal from "../layout/loading-modal";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -26,6 +28,7 @@ export default function LoginForm() {
 
   //Loading state
   const [isLoading, setIsLoading] = useState(false);
+  const [loadingMsg, setLoadingMsg] = useState("");
 
   // Data state
   const [emailVal, setEmailVal] = useState("");
@@ -39,21 +42,30 @@ export default function LoginForm() {
   //Auth global state
   const [_, setAuthState] = useRecoilState(authData);
 
+  //Current user state
+  const [__, setCurrentUser] = useRecoilState(currentUserData);
+
+  //Helper function
+  const loadingFn = (msg: string, val: boolean) => {
+    setIsLoading(val);
+    setLoadingMsg(msg);
+  };
+
   const submitForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true);
+    loadingFn("Loging in", true);
     if (!emailVal.includes("@")) {
       setFormHasError(true);
       setTitleError("Invalid email");
       setMessageError("You must enter a valid email address!");
-      setIsLoading(false);
+      loadingFn("", false);
       return;
     }
     if (passwordVal.trim().length < 7) {
       setFormHasError(true);
       setTitleError("Invalid password");
       setMessageError("You must enter a valid password which contains at least 7 characters!");
-      setIsLoading(false);
+      loadingFn("", false);
       return;
     }
     //Fetch login req
@@ -71,12 +83,34 @@ export default function LoginForm() {
       setFormHasError(true);
       setTitleError("Trouble loging in");
       setMessageError("Please check your internet connection and try again");
+      loadingFn("", false);
+      return;
     }
     const { uid } = await req.json();
     setAuthState(uid);
+
+    // Fetch user info
+    loadingFn("Loading current user data...", true);
+    const fetchCurrentUserData = await fetch("/api/users/currentuserprofile", {
+      method: "GET",
+    });
+    if (!fetchCurrentUserData.ok) {
+      setFormHasError(true);
+      setTitleError("Trouble fetching user data");
+      setMessageError("Please try again!");
+      loadingFn("", false);
+      return;
+    }
+    const { username, description, userImg } = await fetchCurrentUserData.json();
+    setCurrentUser({
+      username,
+      imgUser: userImg,
+      description,
+    });
+    loadingFn("", false);
     router.push("/profile");
-    setIsLoading(false);
   };
+
   return (
     <>
       {formHasError && (
@@ -119,7 +153,7 @@ export default function LoginForm() {
               {showPassword ? <EyeIconCut /> : <EyeIcon />}
             </div>
           </div>
-          <button disabled={isLoading}>{isLoading ? <Spinner /> : "Log in"}</button>
+          <button disabled={isLoading}>Log in</button>
         </form>
         <div className={styles["info-container"]}>
           <p>
@@ -127,6 +161,7 @@ export default function LoginForm() {
           </p>
         </div>
       </div>
+      {isLoading && <LoadingModal message={loadingMsg} />}
     </>
   );
 }

@@ -74,12 +74,21 @@
   padding: 1rem 2rem;
 }
 
+.form-desc button {
+  cursor: pointer;
+  border: none;
+  font-size: 2rem;
+  font-weight: 500;
+  padding: 1rem 2rem;
+}
+
 .add-img-container {
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
   cursor: pointer;
   color: #fff;
+  background-color: transparent !important;
 }
 
 .add-img-container svg {
@@ -92,6 +101,28 @@
   text-align: center;
   color: #fff;
   font-size: 2rem;
+}
+
+.img-container {
+  display: flex;
+  flex-direction: column !important;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.img-container button {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+}
+
+.img-container img {
+  width: 20rem;
+  max-height: 40rem;
 }
 
 @keyframes FadeIn {

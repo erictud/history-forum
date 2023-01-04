@@ -20,6 +20,7 @@
 
 .img-container img {
   width: 30rem;
+  max-height: 40rem;
   outline: 10px solid #333;
 }
 

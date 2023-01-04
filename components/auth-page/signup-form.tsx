@@ -10,9 +10,12 @@ import Modal from "../layout/modal";
 import Spinner from "../layout/spinner";
 import styles from "./auth-form.module.css";
 import { useRouter } from "next/navigation";
+import { currentUserData } from "../../data/currentUser-data";
+import LoadingModal from "../layout/loading-modal";
 
 export default function SignupForm() {
   const router = useRouter();
+
   //Password visibility
   const [showPassword, setShowPassword] = useState(false);
   const passwordRef = useRef() as any;
@@ -24,6 +27,7 @@ export default function SignupForm() {
 
   //Loading state
   const [isLoading, setIsLoading] = useState(false);
+  const [loadingMsg, setLoadingMsg] = useState("");
 
   // Data state
   const [emailVal, setEmailVal] = useState("");
@@ -37,13 +41,24 @@ export default function SignupForm() {
 
   // Auth global state
   const [_, setAuthState] = useRecoilState(authData);
+
+  // Current user state
+  const [__, setCurrentUser] = useRecoilState(currentUserData);
+
+  //Helper function
+  const loadingFn = (msg: string, val: boolean) => {
+    setIsLoading(val);
+    setLoadingMsg(msg);
+  };
+
   const submitForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true);
+    loadingFn("Creating account", true);
     if (!emailVal.includes("@")) {
       setFormHasError(true);
       setTitleError("Invalid email");
       setMessageError("You must enter a valid email address!");
+      loadingFn("", false);
       setIsLoading(false);
       return;
     }
@@ -51,6 +66,7 @@ export default function SignupForm() {
       setFormHasError(true);
       setTitleError("Invalid username");
       setMessageError("You must enter a valid username which contains at least 4 characters!");
+      loadingFn("", false);
       setIsLoading(false);
       return;
     }
@@ -58,6 +74,7 @@ export default function SignupForm() {
       setFormHasError(true);
       setTitleError("Invalid password");
       setMessageError("You must enter a valid password which contains at least 7 characters!");
+      loadingFn("", false);
       setIsLoading(false);
       return;
     }
@@ -78,10 +95,31 @@ export default function SignupForm() {
       setFormHasError(true);
       setTitleError("Trouble creating account");
       setMessageError("Please check your internet connection  and try again");
+      loadingFn("", false);
+      return;
     }
     const { uid } = await req.json();
     setAuthState(uid);
-    setIsLoading(false);
+
+    // Fetching user data
+    loadingFn("Loading current user data...", true);
+    const fetchCurrentUserData = await fetch("/api/users/currentuserprofile", {
+      method: "GET",
+    });
+    if (!fetchCurrentUserData.ok) {
+      setFormHasError(true);
+      setTitleError("Trouble fetching user data");
+      setMessageError("Please try again!");
+      loadingFn("", false);
+      return;
+    }
+    const { username, description, userImg } = await fetchCurrentUserData.json();
+    setCurrentUser({
+      username,
+      imgUser: userImg,
+      description,
+    });
+    loadingFn("", false);
     router.push("/profile");
   };
   return (
@@ -133,7 +171,7 @@ export default function SignupForm() {
               {showPassword ? <EyeIconCut /> : <EyeIcon />}
             </div>
           </div>
-          <button disabled={isLoading}>{isLoading ? <Spinner /> : "Create account"}</button>
+          <button disabled={isLoading}>Create account</button>
         </form>
         <div className={styles["info-container"]}>
           <p>
@@ -141,6 +179,7 @@ export default function SignupForm() {
           </p>
         </div>
       </div>
+      {isLoading && <LoadingModal message={loadingMsg} />}
     </>
   );
 }

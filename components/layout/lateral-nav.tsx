@@ -1,21 +1,27 @@
 "use client";
 
+import { signOut } from "firebase/auth";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { authData } from "../../data/auth-data";
+import { auth } from "../../firebase";
 import ArrLeft from "../../icons/ArrLeft";
 import ArrRight from "../../icons/ArrRight";
 import HomeIcon from "../../icons/HomeIcon";
+import LogoutIcon from "../../icons/LogoutIcon";
 import PlusIcon from "../../icons/PlusIcon";
 import QuestionMarkIcon from "../../icons/QuestionMarkIcon";
 import TrendingIcon from "../../icons/TrendingIcon";
 import UserIcon from "../../icons/UserIcon";
+import LoginForm from "../auth-page/login-form";
 import styles from "./lateral-nav.module.css";
 
 export default function LateralNav() {
   const [showNav, setShowNav] = useState(false);
-  const [uid, _] = useRecoilState(authData);
+  const [uid, setUid] = useRecoilState(authData);
+  const router = useRouter();
   return (
     <>
       {uid && (
@@ -51,6 +57,17 @@ export default function LateralNav() {
                     <PlusIcon /> <p>Add</p>
                   </li>
                 </Link>
+                <li
+                  className={styles["nav-item"]}
+                  onClick={() => {
+                    console.log("ree");
+                    signOut(auth);
+                    setUid("");
+                    router.refresh();
+                  }}
+                >
+                  <LogoutIcon /> <p>Log out</p>
+                </li>
               </ul>
             </div>
           )}

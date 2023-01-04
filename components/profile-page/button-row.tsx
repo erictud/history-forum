@@ -8,7 +8,7 @@ export default function ButtonRow(props: { changeStateFn: any; state: string }) 
         className={`${state === "change-password" && styles.active}`}
         onClick={() => changeStateFn("change-password")}
       >
-        Change password
+        Change username
       </button>
       <button
         className={`${state === "change-info" && styles.active}`}

@@ -37,7 +37,7 @@ export default function Nav() {
             ) : (
               <Link href="/profile">
                 <div className={styles["user-container"]}>
-                  <img src={`${!imgUser && "/default-user.png"}`} alt="Profile picture" />
+                  <img src={`${!imgUser ? "/default-user.png" : imgUser}`} alt="Profile picture" />
                   <p>{username}</p>
                 </div>
               </Link>

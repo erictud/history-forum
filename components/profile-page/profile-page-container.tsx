@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import ButtonRow from "./button-row";
 import ChangeDescription from "./change-profile-info";
-import ChangePassword from "./change-password";
+import ChangeUsername from "./change-username";
 import styles from "./profile-page-container.module.css";
 
 type ProfileStateType = "change-password" | "change-info";
@@ -18,7 +18,7 @@ export default function ProfilPageContainer() {
   return (
     <main className={styles.container}>
       <ButtonRow state={profileState} changeStateFn={changeFn} />
-      {profileState === "change-password" && <ChangePassword />}
+      {profileState === "change-password" && <ChangeUsername />}
       {profileState === "change-info" && <ChangeDescription />}
     </main>
   );
